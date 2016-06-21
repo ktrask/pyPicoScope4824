@@ -17,76 +17,50 @@ class PicoScope4000 {
 	int32_t bufferLth;
 
 	int16_t handle;
-	int16_t buffer[65536];
-	int16_t buffer2[65536];
+	int16_t bufferA[65536];
+	int16_t bufferB[65536];
+	int16_t bufferC[65536];
+	int16_t bufferD[65536];
+	int16_t bufferE[65536];
+	int16_t bufferF[65536];
+	int16_t bufferG[65536];
+	int16_t bufferH[65536];
+	int16_t bufferCpA[65536];
+	int16_t bufferCpB[65536];
+	int16_t bufferCpC[65536];
+	int16_t bufferCpD[65536];
+	int16_t bufferCpE[65536];
+	int16_t bufferCpF[65536];
+	int16_t bufferCpG[65536];
+	int16_t bufferCpH[65536];
 
 
 	public:
-		PS4000A_CHANNEL channelA;
-		PS4000A_CHANNEL channelB;
-		PS4000A_CHANNEL channelC;
-		PS4000A_CHANNEL channelD;
-		PS4000A_CHANNEL channelE;
-		PS4000A_CHANNEL channelF;
-		PS4000A_CHANNEL channelG;
-		PS4000A_CHANNEL channelH;
-		PS4000A_RANGE range10mV;
-		PS4000A_RANGE range20mV;
-		PS4000A_RANGE range50mV;
-		PS4000A_RANGE range100mV;
-		PS4000A_RANGE range200mV;
-		PS4000A_RANGE range500mV;
-		PS4000A_RANGE range1V;
-		PS4000A_RANGE range2V;
-		PS4000A_RANGE range5V;
-		PS4000A_RANGE range10V;
-		PS4000A_RANGE range20V;
-		PS4000A_RANGE range100V;
-		PS4000A_RANGE range200V;
-		PS4000A_COUPLING ac;
-	        PS4000A_COUPLING dc;
-	PicoScope4000(){
-		bufferLth = 65536;
-		//UNIT unit;
-		status = ps4000aOpenUnit(&handle, NULL); // open the first found unit
-		printf("Statuscode %x\n", status);
-	
-		status = ps4000aChangePowerSource(handle, PICO_POWER_SUPPLY_NOT_CONNECTED); //for usb2 connections
-		printf("Statuscode %x\n", status);
-		isNewData = FALSE;
-		isStreaming = TRUE;
-	
-		for( int i = 0; i < 65536; i++) {
-			buffer2[i] = 0;
-			buffer[i] = 0;
-		}
-		channelA = PS4000A_CHANNEL_A;
-		channelB = PS4000A_CHANNEL_B;
-		channelC = PS4000A_CHANNEL_C;
-		channelD = PS4000A_CHANNEL_D;
-		channelE = PS4000A_CHANNEL_E;
-		channelF = PS4000A_CHANNEL_F;
-		channelG = PS4000A_CHANNEL_G;
-		channelH = PS4000A_CHANNEL_H;
-		range10mV = PS4000A_10MV;
-		range20mV = PS4000A_20MV;
-		range50mV = PS4000A_50MV;
-		range100mV= PS4000A_100MV;
-		range200mV= PS4000A_200MV;
-		range500mV= PS4000A_500MV;
-		range1V   = PS4000A_1V;
-		range2V   = PS4000A_2V;
-		range5V   = PS4000A_5V;
-		range10V  = PS4000A_10V;
-		range20V  = PS4000A_50V;
-		range100V = PS4000A_100V;
-		range200V = PS4000A_200V;
-		ac = PS4000A_AC;
-		dc = PS4000A_DC;
-	}
-	~PicoScope4000(){
-		ps4000aCloseUnit(handle);
-	}
+		const PS4000A_CHANNEL channelA = PS4000A_CHANNEL_A;
+		const PS4000A_CHANNEL channelB = PS4000A_CHANNEL_B;
+		const PS4000A_CHANNEL channelC = PS4000A_CHANNEL_C;
+		const PS4000A_CHANNEL channelD = PS4000A_CHANNEL_D;
+		const PS4000A_CHANNEL channelE = PS4000A_CHANNEL_E;
+		const PS4000A_CHANNEL channelF = PS4000A_CHANNEL_F;
+		const PS4000A_CHANNEL channelG = PS4000A_CHANNEL_G;
+		const PS4000A_CHANNEL channelH = PS4000A_CHANNEL_H;
+		const PS4000A_RANGE range10mV = PS4000A_10MV;
+		const PS4000A_RANGE range20mV = PS4000A_20MV;
+		const PS4000A_RANGE range50mV = PS4000A_50MV;
+		const PS4000A_RANGE range100mV = PS4000A_100MV;
+		const PS4000A_RANGE range200mV = PS4000A_200MV;
+		const PS4000A_RANGE range500mV = PS4000A_500MV;
+		const PS4000A_RANGE range1V = PS4000A_1V;
+		const PS4000A_RANGE range2V = PS4000A_2V;
+		const PS4000A_RANGE range5V = PS4000A_5V;
+		const PS4000A_RANGE range10V = PS4000A_10V;
+		const PS4000A_RANGE range20V = PS4000A_20V;
+		const PS4000A_RANGE range100V = PS4000A_100V;
+		const PS4000A_RANGE range200V = PS4000A_200V;
+		const PS4000A_COUPLING ac = PS4000A_AC;
+	        const PS4000A_COUPLING dc = PS4000A_DC;
+	PicoScope4000();
+	~PicoScope4000();
 	void  callbackFunction( 
 		int16_t		handle,
 		int32_t		noOfSamples,
@@ -108,7 +82,7 @@ class PicoScope4000 {
 	int getTimeBase();
 	int setDataBuffer();
 	int setDataBuffer( PS4000A_CHANNEL channel);
-	int streaming( char *filename = "stream.csv", int numberOfSamples = 31*66553, int timeIntervalInNS = 5000);
+	int streaming( const char *filename = "stream.csv", int numberOfSamples = 31*66553, int timeIntervalInNS = 5000);
 };
 
 
