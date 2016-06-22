@@ -74,8 +74,10 @@ int PicoScope4000::setChannel(
         float                   analogOffset
         ) {
 	int16_t isEnabled_int = FALSE;
-	if( isEnabled )
+	if( isEnabled ){
 		isEnabled_int = TRUE;
+		setDataBuffer( channel );
+	}
 	status = ps4000aSetChannel(handle, 
 	                           channel, 
 				   isEnabled_int, 
